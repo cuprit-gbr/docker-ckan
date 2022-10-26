@@ -9,3 +9,4 @@ src/*
 ._*
 .Spotlight-V100
 .Trashes
+.github/workflows/publish-docker.yml
