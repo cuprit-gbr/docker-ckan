@@ -2,11 +2,45 @@ version: "3"
 
 services:
 
+  traefik:
+    # The official v2 Traefik docker image
+    image: traefik:v2.4
+    container_name: traefik
+    # Enables the web UI and tells Traefik to listen to docker
+    command:
+      - --api.insecure=false
+      - --providers.docker
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --entrypoints.web.http.redirections.entrypoint.to=websecure
+      - --entrypoints.web.http.redirections.entrypoint.scheme=https
+      - --providers.docker.exposedbydefault=false
+      - --certificatesresolvers.leresolver.acme.email=toni.schoenbuchner@cuprit.net
+      - --certificatesresolvers.leresolver.acme.storage=/letsencrypt/acme.json
+      - --certificatesresolvers.leresolver.acme.tlschallenge=true
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./letsencrypt:/letsencrypt"
+    labels:
+      - "traefik.enable=true"
+
   nginx:
     container_name: nginx
     build:
       context: nginx/
       dockerfile: Dockerfile
-    ports:
-      - "0.0.0.0:80:80"
-      - "0.0.0.0:443:443"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`ckan-dev.cuprit.net`)"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
+      - "traefik.http.routers.traefik.tls=true"
+      - "traefik.http.routers.traefik.tls.certresolver=leresolver"
+
+  ckan:
+    environment:
+      - CKAN_SITE_URL=https://ckan-dev.cuprit.net/
