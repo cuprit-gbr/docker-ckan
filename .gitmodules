@@ -1,0 +1,3 @@
+[submodule "src/ckanext-cuprit"]
+	path = src/ckanext-cuprit
+	url = https://github.com/cuprit-gbr/ckanext-cuprit

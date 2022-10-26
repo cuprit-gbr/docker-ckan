@@ -17,8 +17,7 @@ RUN echo $TZ > /etc/timezone
 # ldap bindings
 RUN apk add libtool openldap-dev
 
-RUN pip install -e git+https://github.com/cuprit-gbr/ckanext-cuprit#egg=ckanext-cuprit && \
-    pip install -e git+https://github.com/NaturalHistoryMuseum/ckanext-ldap#egg=ckanext-ldap && \
+RUN pip install -e git+https://github.com/NaturalHistoryMuseum/ckanext-ldap#egg=ckanext-ldap && \
     pip install -e git+https://github.com/ckan/ckanext-dcat.git#egg=ckanext-dcat && \
     pip install -r ${SRC_DIR}/ckanext-dcat/requirements.txt && \
     pip install -e git+https://github.com/cuprit-gbr/ckanext-resource-type-validation.git#egg=ckanext-resource-type-validation
