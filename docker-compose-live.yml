@@ -29,18 +29,24 @@ services:
     labels:
       - "traefik.enable=true"
 
-  nginx:
-    container_name: nginx
-    build:
-      context: nginx/
-      dockerfile: Dockerfile
+  # nginx:
+  #   container_name: nginx
+  #   build:
+  #     context: nginx/
+  #     dockerfile: Dockerfile
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.traefik.rule=Host(`ckan-dev.cuprit.net`)"
+  #     - "traefik.http.routers.traefik.entrypoints=websecure"
+  #     - "traefik.http.routers.traefik.tls=true"
+  #     - "traefik.http.routers.traefik.tls.certresolver=leresolver"
+
+  ckan:
+    environment:
+      - CKAN_SITE_URL=https://ckan-dev.cuprit.net/
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.rule=Host(`ckan-dev.cuprit.net`)"
       - "traefik.http.routers.traefik.entrypoints=websecure"
       - "traefik.http.routers.traefik.tls=true"
       - "traefik.http.routers.traefik.tls.certresolver=leresolver"
-
-  ckan:
-    environment:
-      - CKAN_SITE_URL=https://ckan-dev.cuprit.net/

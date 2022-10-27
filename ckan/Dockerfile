@@ -39,3 +39,6 @@ RUN for d in $APP_DIR/patches/*; do \
             done ; \
         fi ; \
     done
+
+# run http socket for Traefik
+RUN sed -i 's/http 0.0.0.0:5000/http-socket 0.0.0.0:5000/' /srv/app/start_ckan.sh
