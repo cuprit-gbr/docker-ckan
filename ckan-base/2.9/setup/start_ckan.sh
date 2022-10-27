@@ -9,7 +9,7 @@ then
     for f in /docker-entrypoint.d/*; do
         case "$f" in
             *.sh)     echo "$0: Running init file $f"; . "$f" ;;
-            *.py)     echo "$0: Running init file $f"; python3 "$f"; echo ;;
+            *.py)     echo "$0: Running init file $f"; python "$f"; echo ;;
             *)        echo "$0: Ignoring $f (not an sh or py file)" ;;
         esac
         echo
@@ -22,11 +22,11 @@ UWSGI_OPTS="--plugins http,python \
             --wsgi-file /srv/app/wsgi.py \
             --module wsgi:application \
             --uid 92 --gid 92 \
-            --http-socket 0.0.0.0:5000 \
+            --http 0.0.0.0:5000 \
             --master --enable-threads \
             --lazy-apps \
             -p 2 -L -b 32768 --vacuum \
-            --harakiri $UWSGI_HARAKIRI"
+            --harakiri 50"
 
 if [ $? -eq 0 ]
 then
