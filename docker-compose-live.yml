@@ -44,6 +44,7 @@ services:
   ckan:
     environment:
       - CKAN_SITE_URL=https://ckan-dev.cuprit.net/
+      - UWSGI_HARAKIRI=240
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.rule=Host(`ckan-dev.cuprit.net`)"

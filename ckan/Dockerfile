@@ -22,7 +22,8 @@ RUN pip install -e git+https://github.com/cuprit-gbr/ckanext-cuprit#egg=ckanext-
     pip install -e git+https://github.com/NaturalHistoryMuseum/ckanext-ldap#egg=ckanext-ldap && \
     pip install -e git+https://github.com/ckan/ckanext-dcat.git#egg=ckanext-dcat && \
     pip install -r ${SRC_DIR}/ckanext-dcat/requirements.txt && \
-    pip install -e git+https://github.com/cuprit-gbr/ckanext-resource-type-validation.git#egg=ckanext-resource-type-validation
+    pip install -e git+https://github.com/cuprit-gbr/ckanext-resource-type-validation.git#egg=ckanext-resource-type-validation && \
+    pip install -e git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pages
 
 # Install the extension(s) you wrote for your own project
 # RUN pip install -e git+https://github.com/your-org/ckanext-your-extension.git@v1.0.0#egg=ckanext-your-extension
@@ -42,3 +43,4 @@ RUN for d in $APP_DIR/patches/*; do \
 
 # run http socket for Traefik
 RUN sed -i 's/http 0.0.0.0:5000/http-socket 0.0.0.0:5000/' /srv/app/start_ckan.sh
+RUN sed -i 's/-p 2/-p 4/' /srv/app/start_ckan.sh
