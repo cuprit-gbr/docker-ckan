@@ -51,3 +51,6 @@ services:
       - "traefik.http.routers.traefik.entrypoints=websecure"
       - "traefik.http.routers.traefik.tls=true"
       - "traefik.http.routers.traefik.tls.certresolver=leresolver"
+      - "traefik.http.middlewares.test-http-cache.plugin.httpCache.maxTtl=600"
+      - "traefik.http.middlewares.testheader.headers.accesscontrolmaxage=100"
+
