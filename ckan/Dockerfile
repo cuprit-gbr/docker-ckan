@@ -45,3 +45,5 @@ RUN for d in $APP_DIR/patches/*; do \
 # run http socket for Traefik
 RUN sed -i 's/http 0.0.0.0:5000/http-socket 0.0.0.0:5000/' /srv/app/start_ckan.sh
 RUN sed -i 's/-p 2/-p 4/' /srv/app/start_ckan.sh
+
+COPY docker-entrypoint.d/* /docker-entrypoint.d/
