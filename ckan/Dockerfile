@@ -24,8 +24,7 @@ RUN pip install -e git+https://github.com/cuprit-gbr/ckanext-cuprit#egg=ckanext-
     pip install -r ${SRC_DIR}/ckanext-dcat/requirements.txt && \
     pip install -e git+https://github.com/fwoerister/ckanext-archiveview#egg=ckanext-archiveview && \
     pip install -e git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pages && \
-    pip install -e git+https://github.com/NaturalHistoryMuseum/ckanext-doi.git#egg=ckanext-doi && \
-    pip install -r ${SRC_DIR}/ckanext-doi/requirements.txt 
+    pip install -e git+https://github.com/NaturalHistoryMuseum/ckanext-doi.git#egg=ckanext-doi
 
 # Install the extension(s) you wrote for your own project
 # RUN pip install -e git+https://github.com/your-org/ckanext-your-extension.git@v1.0.0#egg=ckanext-your-extension
